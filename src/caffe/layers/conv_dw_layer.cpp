@@ -17,7 +17,7 @@ void ConvolutionDepthwiseLayer<Dtype>::LayerSetUp(
     if (conv_param.kernel_size_size() == 1) {
       kernel_h_ = conv_param.kernel_size(0);
       kernel_w_ = conv_param.kernel_size(0);
-    } else {
+    } else if(conv_param.kernel_size_size() == 2) {
       kernel_h_ = conv_param.kernel_size(0);
       kernel_w_ = conv_param.kernel_size(1);
     }
@@ -29,7 +29,7 @@ void ConvolutionDepthwiseLayer<Dtype>::LayerSetUp(
     if (conv_param.stride_size() == 1) {
       stride_h_ = conv_param.stride(0);
       stride_w_ = conv_param.stride(0);
-    } else {
+    } else if(conv_param.kernel_size_size() == 2) {
       stride_h_ = conv_param.stride(0);
       stride_w_ = conv_param.stride(1);
     }
@@ -41,7 +41,7 @@ void ConvolutionDepthwiseLayer<Dtype>::LayerSetUp(
     if (conv_param.pad_size() == 1) {
       pad_h_ = conv_param.pad(0);
       pad_w_ = conv_param.pad(0);
-    } else {
+    } else if(conv_param.pad_size() == 2) {
       pad_h_ = conv_param.pad(0);
       pad_w_ = conv_param.pad(1);
     }
@@ -50,7 +50,7 @@ void ConvolutionDepthwiseLayer<Dtype>::LayerSetUp(
     if (conv_param.dilation_size() == 1) {
       dilation_h_ = conv_param.dilation(0);
       dilation_w_ = conv_param.dilation(0);
-    } else {
+    } else if (conv_param.dilation_size() == 2){
       dilation_h_ = conv_param.dilation(0);
       dilation_w_ = conv_param.dilation(1);
     }

@@ -30,14 +30,14 @@ class ConvolutionDepthwiseLayer : public Layer<Dtype> {
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom);
-  unsigned int kernel_h_;
-  unsigned int kernel_w_;
-  unsigned int stride_h_;
-  unsigned int stride_w_;
-  unsigned int pad_h_;
-  unsigned int pad_w_;
-  unsigned int dilation_h_;
-  unsigned int dilation_w_;
+  unsigned int kernel_h_ = 1;//initialization par caffe protofile
+  unsigned int kernel_w_ = 1;
+  unsigned int stride_h_ = 1;
+  unsigned int stride_w_ = 1;
+  unsigned int pad_h_ = 0;
+  unsigned int pad_w_ = 0;
+  unsigned int dilation_h_ = 1;
+  unsigned int dilation_w_ = 1;
   Blob<Dtype> weight_buffer_;
   Blob<Dtype> weight_multiplier_;
   Blob<Dtype> bias_buffer_;
@@ -45,5 +45,6 @@ class ConvolutionDepthwiseLayer : public Layer<Dtype> {
 };
 
 }  // namespace caffe
+
 
 #endif  // CAFFE_CONV_DW_LAYER_HPP_
