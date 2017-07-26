@@ -35,7 +35,7 @@ private:
     void Resize_cpu(Dtype *output, const Dtype *input, int group_row, int group_column, int len);
     void Resize_gpu(Dtype *output, const Dtype *input, int group_row, int group_column, int len);
 
-    Blob<Dtype> temp_blob_;
+    //Blob<Dtype> temp_blob_;
     int group_;
 };
 
