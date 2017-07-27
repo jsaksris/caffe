@@ -113,6 +113,7 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
   size_t workspace_limit_bytes = 8*1024*1024;
 
   for (int i = 0; i < bottom.size(); i++) {
+std::cout<<"conv: " << "bottom[" << i << "]=" << bottom[i]->shape_string() << "\n";
     cudnn::setTensor4dDesc<Dtype>(&bottom_descs_[i],
         this->num_,
         this->channels_ / this->group_, height, width,

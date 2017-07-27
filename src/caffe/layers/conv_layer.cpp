@@ -35,7 +35,9 @@ void ConvolutionLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
         const Dtype* bias = this->blobs_[1]->cpu_data();
         this->forward_cpu_bias(top_data + n * this->top_dim_, bias);
       }
+    std::cout<<"num_n: "<< this->num_ << "\n";
     }
+  std::cout<<"conv: " << "bottom[" << i << "]=" << bottom[i]->shape_string() << "\n";
   }
 }
 
