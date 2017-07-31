@@ -31,6 +31,7 @@ template <typename Dtype>
 void EltwiseLayer<Dtype>::Reshape(const vector<Blob<Dtype>*>& bottom,
       const vector<Blob<Dtype>*>& top) {
   for (int i = 1; i < bottom.size(); ++i) {
+    std::cout<<"Eltwise: " << "bottom[" << i << "]=" << bottom[i]->shape_string() << " / bottom[0]=" << bottom[0]->shape_string() << "\n";
     if (bottom[i]->shape() != bottom[0]->shape())
       {
 	LOG(ERROR) << "Eltwise shape mismatch / bottom[" << i << "]=" << bottom[i]->shape_string() << " / bottom[0]=" << bottom[0]->shape_string();

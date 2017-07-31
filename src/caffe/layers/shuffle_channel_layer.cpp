@@ -12,6 +12,7 @@ void ShuffleChannelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype> *> &bottom,
     CHECK_GT(group_, 0) << "group must be greater than 0";
     //temp_blob_.ReshapeLike(*bottom[0]);
 	top[0]->ReshapeLike(*bottom[0]);
+        std::cout<<"Top shape : "<<top[0]->shape_string()<<"\n";
 }
 
 template <typename Dtype>
@@ -23,7 +24,10 @@ void ShuffleChannelLayer<Dtype>::Resize_cpu(Dtype *output, const Dtype *input, i
         {
             const Dtype* p_i = input + (i * group_column + j ) * len;
             Dtype* p_o = output + (j * group_row + i ) * len;
-
+            std::cout<<"index : "<< (i*group_column)+(j+1)<<"\n"; 
+            std::cout<<"len : "<<len<<"\n"; 
+            std::cout<<"p_i : "<<p_i<<"\n";
+            std::cout<<"p_o : "<<p_o<<"\n";
             caffe_copy(len, p_i, p_o);
         }
     }
@@ -43,13 +47,21 @@ void ShuffleChannelLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     int group_row = group_;
     int group_column = int(chs / group_row);
     CHECK_EQ(chs, (group_column * group_row)) << "Wrong group size.";
+    
+    std::cout<<"##### shuffle layer cpu ######: " << "\n";
+    std::cout<<"num = bottom[0]->shape(0) : "<< num  << "\n";
+    std::cout<<"feature_map_size = bottom[0]->count(1) : "<< feature_map_size << "\n";
+    std::cout<<"sp_sz = bottom[0]->count(2) : "<< sp_sz << "\n";
+    std::cout<<"chs = bottom[0]->shape(1) : " << chs << "\n";
 
     //Dtype* temp_data = temp_blob_.mutable_cpu_data();
     for(int n = 0; n < num; ++n)
     {
+     std::cout<<"n inside the loop : "<<n << "\n";
 		Resize_cpu(top_data + n*feature_map_size, bottom_data + n*feature_map_size, group_row, group_column, sp_sz);
     }
     //caffe_copy(bottom[0]->count(), temp_blob_.cpu_data(), top_data);
+     std::cout<<"##### end shuffle layer cpu ######: " << "\n";
 }
 
 template <typename Dtype>

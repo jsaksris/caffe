@@ -49,6 +49,7 @@ void ShuffleChannelLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
 
     int group_row = group_;
     int group_column = int(chs / group_row);
+    std::cout<<"shuffle_gpu: " << "bottom[" << 0 << "]=" << bottom[0]->shape_string() << "\n";
     CHECK_EQ(chs, (group_column * group_row)) << "Wrong group size.";
 	int count = num * group_column * group_row;
 	ShuffleChannelKernel<Dtype> << <CAFFE_GET_BLOCKS(count), CAFFE_CUDA_NUM_THREADS >> >(
