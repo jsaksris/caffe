@@ -59,7 +59,6 @@ void ConvolutionDepthwiseLayer<Dtype>::Forward_gpu(
   const int top_width = top[0]->width();
   const int bottom_height = bottom[0]->height();
   const int bottom_width = bottom[0]->width();
-  std::cout<<"conv_dw_gpu: " << "bottom[" << 0 << "]=" << bottom[0]->shape_string() << "\n";
   ConvolutionDepthwiseWeightForward<Dtype>
         // NOLINT_NEXT_LINE(whitespace/operators)
         <<<CAFFE_GET_BLOCKS(count), CAFFE_CUDA_NUM_THREADS>>>(

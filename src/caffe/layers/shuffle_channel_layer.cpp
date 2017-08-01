@@ -11,7 +11,7 @@ void ShuffleChannelLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype> *> &bottom,
     group_ = this->layer_param_.shuffle_channel_param().group();
     CHECK_GT(group_, 0) << "group must be greater than 0";
     //temp_blob_.ReshapeLike(*bottom[0]);
-	top[0]->ReshapeLike(*bottom[0]);
+    top[0]->ReshapeLike(*bottom[0]);
 }
 
 template <typename Dtype>
@@ -27,6 +27,17 @@ void ShuffleChannelLayer<Dtype>::Resize_cpu(Dtype *output, const Dtype *input, i
             caffe_copy(len, p_i, p_o);
         }
     }
+}
+
+template <typename Dtype>
+void ShuffleChannelLayer<Dtype>::Reshape(const vector<Blob<Dtype> *> &bottom, const vector<Blob<Dtype> *> &top)
+{
+  int channels_ = bottom[0]->channels();
+  int height_ = bottom[0]->height();
+  int width_ = bottom[0]->width();
+
+  top[0]->Reshape(bottom[0]->num(), channels_, height_, width_);
+
 }
 
 template <typename Dtype>
