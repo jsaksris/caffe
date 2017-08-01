@@ -142,7 +142,7 @@ void ConvolutionDepthwiseLayer<Dtype>::Forward_cpu(
   const Dtype* bottom_data = bottom[0]->cpu_data();
   const Dtype* weight_data_base = this->blobs_[0]->cpu_data();
   Dtype* top_data = top[0]->mutable_cpu_data();
-  std::cout<<"conv_dw: " << "bottom[" << 0 << "]=" << bottom[0]->shape_string() << "\n";
+  
   for (int n = 0; n < num; ++n) {
     for (int c = 0; c < channels; ++c) {
       for (int h = 0; h < top_height; ++h) {
